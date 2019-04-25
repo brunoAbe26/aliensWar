@@ -28,9 +28,9 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        let map = {};
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, () => this.teclaPressionada(event, map), this);
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, () => this.teclaSolta(event, map), this);
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, () => this.teclaPressionada(event), this);
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, () => this.teclaSolta(event), this);
+        console.log('DIFICULDADE', cc.sys.localStorage.getItem('difficulty'));
         let canvas = cc.find('Canvas');
         canvas.on('mousemove', this.mudarDirecao, this);
         canvas.on('mousedown', this.atirar, this);
@@ -65,7 +65,7 @@ cc.Class({
         this.node.angle = this.olharPara(this._direcao);
     },
 
-    teclaPressionada: function(event, map) {
+    teclaPressionada: function(event) {
         const macro = cc.macro.KEY;
         const tecla = event.keyCode;
         this._acelerando = true;
@@ -98,7 +98,7 @@ cc.Class({
         this.movimentaX = true;
     },
 
-    teclaSolta: function(event, map) {
+    teclaSolta: function(event) {
         this._acelerando = false;
 
         const tecla = event.keyCode;

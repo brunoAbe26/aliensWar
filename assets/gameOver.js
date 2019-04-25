@@ -17,11 +17,12 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        cc.Button.clickEvents(() => foiClicado());
+        const btnRestart = cc.find('button');
+        btnRestart.on(cc.Node.EventType.MOUSE_DOWN, this.playAgain, this);
     },
 
-    foiClicado: function() {
-        console.log('Fui clicado!')
+    playAgain: function() {
+        cc.director.loadScene('Jogo');
     },
 
     start () {
