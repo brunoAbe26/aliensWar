@@ -30,10 +30,18 @@ cc.Class({
     onLoad () {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, () => this.teclaPressionada(event), this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, () => this.teclaSolta(event), this);
-        console.log('DIFICULDADE', cc.sys.localStorage.getItem('difficulty'));
+        const dificuldade = cc.sys.localStorage.getItem('difficulty');
         let canvas = cc.find('Canvas');
         canvas.on('mousemove', this.mudarDirecao, this);
         canvas.on('mousedown', this.atirar, this);
+
+        if(dificuldade === 'easy') {
+            this.vidaMaxima = 1000;
+        } else if(dificuldade === 'normal') {
+            this.vidaMaxima = 500;
+        } else {
+            this.vidaMaxima = 100;
+        }
 
         this._vidaAtual = this.vidaMaxima;
         this.barraVida.progress = 1;
